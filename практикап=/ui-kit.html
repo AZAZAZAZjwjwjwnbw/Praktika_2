@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI-Kit Аспро.Cloud</title>
+    <style>
+        /* ============================================================
+           UI-Kit — Аспро.Cloud
+           Методология: БЭМ
+           Версия: 1.0.0
+           ============================================================ */
+
+        /* ---------- Базовые переменные ---------- */
+        :root {
+            --bg: #0b0d12;
+            --surface: #131820;
+            --border: #262c38;
+            --text: #edf0f5;
+            --text-second: #919bb0;
+            --accent: #4a7cff;
+            --accent-hover: #3a6be0;
+            --gradient: linear-gradient(135deg, #4a7cff 0%, #ff6bcb 100%);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-xs: 8px;
+            --shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            --shadow-hover: 0 8px 30px rgba(74, 124, 255, 0.15);
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+            --transition: 0.3s ease;
+        }
+
+        /* ---------- Сброс и база ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        /* ---------- Контейнер UI-Kit ---------- */
+        .ui-kit {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .ui-kit__header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .ui-kit__title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.3rem;
+        }
+
+        .ui-kit__version {
+            color: var(--text-second);
+            font-size: 0.9rem;
+        }
+
+        .ui-kit__section {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .ui-kit__section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .ui-kit__section-desc {
+            color: var(--text-second);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ui-kit__row {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .ui-kit__col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* ---------- Компонент: Цвета ---------- */
+        .colors {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .colors__item {
+            width: 140px;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .colors__item--bg { background: var(--bg); color: var(--text); }
+        .colors__item--surface { background: var(--surface); color: var(--text); }
+        .colors__item--border { background: var(--border); color: var(--text); }
+        .colors__item--text { background: var(--text); color: var(--bg); }
+        .colors__item--text-second { background: var(--text-second); color: var(--bg); }
+        .colors__item--accent { background: var(--accent); color: #fff; }
+        .colors__item--gradient { background: var(--gradient); color: #fff; }
+
+        .colors__item .colors__label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        .colors__item .colors__value {
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+
+        /* ---------- Компонент: Кнопки (.btn) ---------- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            white-space: nowrap;
+            font-family: var(--font);
+        }
+
+        .btn--primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(74, 124, 255, 0.3);
+        }
+        .btn--primary:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 6px 24px rgba(74, 124, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn--secondary {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .btn--secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .btn--outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(74, 124, 255, 0.05);
+        }
+
+        .btn--white {
+            background: #fff;
+            color: #1a1a2e;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+        .btn--white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn--ghost {
+            background: transparent;
+            color: var(--text-second);
+            border: none;
+            padding: 0.4rem 0.8rem;
+        }
+        .btn--ghost:hover {
+            color: var(--text);
+        }
+
+        .btn--lg {
+            padding: 0.9rem 2.6rem;
+            font-size: 1.1rem;
+        }
+
+        .btn--sm {
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .btn--block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ---------- Компонент: Карточка (.card) ---------- */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: var(--transition);
+            width: 280px;
+        }
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card--highlight {
+            border-color: var(--accent);
+        }
+
+        .card__badge {
+            display: inline-block;
+            background: var(--gradient);
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.1rem 0.7rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .card__icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card__title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .card__desc {
+            color: var(--text-second);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .card__link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .card__link:hover {
+            text-decoration: underline;
+        }
+
+        .cards {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- Компонент: Форма (.form) ---------- */
+        .form {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .form__group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form__label {
+            display: block;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .form__input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1.2rem;
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            font-family: var(--font);
+        }
+        .form__input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(74, 124, 255, 0.1);
+        }
+        .form__input::placeholder {
+            color: var(--text-second);
+        }
+        .form__input--error {
+            border-color: #ff4757;
+        }
+        .form__input--error:focus {
+            box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1);
+        }
+        .form__input--success {
+            border-color: #2ed573;
+        }
+
+        .form__checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-second);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .form__checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .form__radio {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-second);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .form__radio input[type="radio"] {
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .form__error {
+            color: #ff4757;
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .form__hint {
+            color: var(--text-second);
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        /* ---------- Компонент: Тариф (.tariff) ---------- */
+        .tariff {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.8rem 1.5rem;
+            position: relative;
+            transition: var(--transition);
+            width: 280px;
+            text-align: center;
+        }
+        .tariff:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .tariff--popular {
+            border-color: var(--accent);
+        }
+
+        .tariff__sticker {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--gradient);
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .tariff__name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        .tariff__desc {
+            color: var(--text-second);
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+            min-height: 40px;
+        }
+
+        .tariff__price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+        .tariff__price .tariff__period {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-second);
+        }
+
+        .tariff__saving {
+            color: #2ed573;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .tariff__features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.2rem 0;
+            text-align: left;
+        }
+
+        .tariff__feature {
+            color: var(--text-second);
+            font-size: 0.85rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .tariff__feature:last-child {
+            border-bottom: none;
+        }
+        .tariff__feature .tariff__check {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .tariff__btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .tariffs {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- Компонент: Шапка (.header) ---------- */
+        .header {
+            background: rgba(11, 13, 18, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.8rem;
+        }
+
+        .header__logo {
+            font-weight: 700;
+            font-size: 1.4rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .header__nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .header__link {
+            color: var(--text-second);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .header__link:hover {
+            color: var(--text);
+        }
+
+        .header__actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .header__phone {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        .header__phone:hover {
+            color: var(--accent);
+        }
+
+        /* ---------- Компонент: Футер (.footer) ---------- */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer__container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.8rem;
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer__col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer__title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+
+        .footer__link {
+            color: var(--text-second);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        .footer__link:hover {
+            color: var(--text);
+        }
+
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-second);
+        }
+
+        .footer__socials {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .footer__socials span {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .footer__socials span:hover {
+            color: var(--text);
+        }
+
+        /* ---------- Компонент: Бейдж (.badge) ---------- */
+        .badge {
+            display: inline-block;
+            padding: 0.1rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge--accent {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .badge--gradient {
+            background: var(--gradient);
+            color: #fff;
+        }
+
+        .badge--success {
+            background: #2ed573;
+            color: #fff;
+        }
+
+        .badge--warning {
+            background: #ffa502;
+            color: #fff;
+        }
+
+        /* ---------- Компонент: Секция (.section) ---------- */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section__title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section__desc {
+            color: var(--text-second);
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* ---------- Компонент: Шаг (.step) ---------- */
+        .step {
+            text-align: center;
+        }
+
+        .step__number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.8rem;
+        }
+
+        .step__title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .step__desc {
+            color: var(--text-second);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        /* ---------- Компонент: Особенность (.feature) ---------- */
+        .feature {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .feature:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature__icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .feature__title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .feature__desc {
+            color: var(--text-second);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* ---------- Компонент: Модалка (.modal) ---------- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal__content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+
+        .modal__close {
+            position: absolute;
+            top: 0.8rem;
+            right: 1.2rem;
+            background: transparent;
+            border: none;
+            color: var(--text-second);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .modal__close:hover {
+            color: var(--text);
+        }
+
+        .modal__title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal__desc {
+            color: var(--text-second);
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* ---------- Компонент: Таб (.tabs) ---------- */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tabs__btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-second);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .tabs__btn:hover {
+            border-color: var(--accent);
+            color: var(--text);
+        }
+        .tabs__btn--active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        /* ---------- Утилиты ---------- */
+        .u-mt-1 { margin-top: 0.5rem; }
+        .u-mt-2 { margin-top: 1rem; }
+        .u-mt-3 { margin-top: 1.5rem; }
+        .u-mb-1 { margin-bottom: 0.5rem; }
+        .u-mb-2 { margin-bottom: 1rem; }
+        .u-mb-3 { margin-bottom: 1.5rem; }
+        .u-gap-1 { gap: 0.5rem; }
+        .u-gap-2 { gap: 1rem; }
+        .u-gap-3 { gap: 1.5rem; }
+        .u-flex { display: flex; }
+        .u-flex-wrap { flex-wrap: wrap; }
+        .u-flex-center { align-items: center; justify-content: center; }
+        .u-text-center { text-align: center; }
+
+        /* ---------- Адаптив UI-Kit ---------- */
+        @media (max-width: 992px) {
+            .features { grid-template-columns: repeat(2, 1fr); }
+            .steps { grid-template-columns: 1fr 1fr; }
+            .footer__grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .ui-kit__section { padding: 1rem; }
+            .features { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .footer__grid { grid-template-columns: 1fr; }
+            .card { width: 100%; }
+            .tariff { width: 100%; max-width: 320px; margin: 0 auto; }
+            .header__nav { display: none; }
+            .header__phone { display: none; }
+            .colors__item { width: 100%; }
+            .ui-kit__row { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ui-kit">
+        <!-- ===== ШАПКА UI-KIT ===== -->
+        <header class="ui-kit__header">
+            <h1 class="ui-kit__title">UI-Kit Аспро.Cloud</h1>
+            <p class="ui-kit__version">Версия 1.0.0 · Методология БЭМ · Переиспользуемые компоненты</p>
+        </header>
+
+        <!-- ===== ЦВЕТА ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Цветовая схема</h2>
+            <p class="ui-kit__section-desc">Основные цвета интерфейса, используемые в проекте</p>
+            <div class="colors">
+                <div class="colors__item colors__item--bg">
+                    <span class="colors__label">--bg</span>
+                    <span class="colors__value">#0b0d12</span>
+                </div>
+                <div class="colors__item colors__item--surface">
+                    <span class="colors__label">--surface</span>
+                    <span class="colors__value">#131820</span>
+                </div>
+                <div class="colors__item colors__item--border">
+                    <span class="colors__label">--border</span>
+                    <span class="colors__value">#262c38</span>
+                </div>
+                <div class="colors__item colors__item--text">
+                    <span class="colors__label">--text</span>
+                    <span class="colors__value">#edf0f5</span>
+                </div>
+                <div class="colors__item colors__item--text-second">
+                    <span class="colors__label">--text-second</span>
+                    <span class="colors__value">#919bb0</span>
+                </div>
+                <div class="colors__item colors__item--accent">
+                    <span class="colors__label">--accent</span>
+                    <span class="colors__value">#4a7cff</span>
+                </div>
+                <div class="colors__item colors__item--gradient">
+                    <span class="colors__label">--gradient</span>
+                    <span class="colors__value">#4a7cff → #ff6bcb</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== КНОПКИ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Кнопки <span class="badge badge--accent">.btn</span></h2>
+            <p class="ui-kit__section-desc">Основные варианты кнопок с модификаторами</p>
+            <div class="ui-kit__row">
+                <button class="btn btn--primary">Primary</button>
+                <button class="btn btn--secondary">Secondary</button>
+                <button class="btn btn--outline">Outline</button>
+                <button class="btn btn--white">White</button>
+                <button class="btn btn--ghost">Ghost</button>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <button class="btn btn--primary btn--lg">Large</button>
+                <button class="btn btn--primary btn--sm">Small</button>
+                <button class="btn btn--primary btn--block" style="max-width:300px;">Block</button>
+                <button class="btn btn--primary" disabled>Disabled</button>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .btn .btn--primary .btn--secondary .btn--outline .btn--white .btn--ghost .btn--lg .btn--sm .btn--block
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== КАРТОЧКИ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Карточки <span class="badge badge--accent">.card</span></h2>
+            <p class="ui-kit__section-desc">Карточки с иконкой, заголовком, описанием и ссылкой</p>
+            <div class="cards">
+                <div class="card">
+                    <span class="card__icon">📊</span>
+                    <h3 class="card__title">Управление проектами</h3>
+                    <p class="card__desc">Планируйте проекты, распределяйте нагрузку команды, учитывайте время и деньги</p>
+                    <a href="#" class="card__link">Подробнее →</a>
+                </div>
+                <div class="card card--highlight">
+                    <span class="card__badge">Хит</span>
+                    <span class="card__icon">💰</span>
+                    <h3 class="card__title">Финансы</h3>
+                    <p class="card__desc">Отслеживайте доходы и расходы в режиме реального времени</p>
+                    <a href="#" class="card__link">Подробнее →</a>
+                </div>
+                <div class="card">
+                    <span class="card__icon">🤖</span>
+                    <h3 class="card__title">Аспро.ИИ</h3>
+                    <p class="card__desc">Искусственный интеллект для автоматизации бизнес-процессов</p>
+                    <a href="#" class="card__link">Подробнее →</a>
+                </div>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .card .card--highlight .card__badge .card__icon .card__title .card__desc .card__link
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== ФОРМЫ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Формы <span class="badge badge--accent">.form</span></h2>
+            <p class="ui-kit__section-desc">Элементы форм с различными состояниями</p>
+            <div class="ui-kit__row">
+                <form class="form">
+                    <div class="form__group">
+                        <label class="form__label">Электронная почта</label>
+                        <input type="email" class="form__input" placeholder="Введите ваш email" />
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Пароль</label>
+                        <input type="password" class="form__input" placeholder="Введите пароль" />
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Состояния поля</label>
+                        <input type="text" class="form__input" placeholder="Обычное состояние" />
+                        <input type="text" class="form__input form__input--error u-mt-1" placeholder="Ошибка" value="Неверный email" />
+                        <input type="text" class="form__input form__input--success u-mt-1" placeholder="Успешно" value="Проверено" />
+                    </div>
+                    <div class="form__group">
+                        <label class="form__checkbox">
+                            <input type="checkbox" checked /> Я принимаю лицензионное соглашение
+                        </label>
+                        <label class="form__checkbox u-mt-1">
+                            <input type="checkbox" /> Я принимаю политику обработки данных
+                        </label>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__radio">
+                            <input type="radio" name="plan" checked /> Тариф «Старт»
+                        </label>
+                        <label class="form__radio u-mt-1">
+                            <input type="radio" name="plan" /> Тариф «Команда»
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Отправить</button>
+                </form>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .form .form__group .form__label .form__input .form__input--error .form__input--success .form__checkbox .form__radio
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== ТАРИФЫ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Тарифы <span class="badge badge--accent">.tariff</span></h2>
+            <p class="ui-kit__section-desc">Карточки тарифных планов для презентации стоимости</p>
+            <div class="tariffs">
+                <div class="tariff tariff--starter">
+                    <div class="tariff__name">Старт</div>
+                    <div class="tariff__desc">Подойдет небольшой команде для эффективной работы и продаж</div>
+                    <div class="tariff__price">2 990 ₽ <span class="tariff__period">/мес.</span></div>
+                    <ul class="tariff__features">
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> 5 пользователей</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> 15 ГБ хранилища</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> CRM</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> Проекты</li>
+                    </ul>
+                    <button class="btn btn--outline tariff__btn">Начать бесплатно</button>
+                </div>
+
+                <div class="tariff tariff--popular">
+                    <div class="tariff__sticker">Хит</div>
+                    <div class="tariff__name">Команда</div>
+                    <div class="tariff__desc">Подойдет небольшому бизнесу или отделу для работы, продаж и финучета</div>
+                    <div class="tariff__price">7 490 ₽ <span class="tariff__period">/мес.</span></div>
+                    <div class="tariff__saving">Экономия 4 560 ₽</div>
+                    <ul class="tariff__features">
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> 10 пользователей</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> 75 ГБ хранилища</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> CRM + Финансы</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> Проекты + Задачи</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> Аспро.ИИ <span class="badge badge--accent">модуль</span></li>
+                    </ul>
+                    <button class="btn btn--primary tariff__btn">Начать бесплатно</button>
+                </div>
+
+                <div class="tariff tariff--business">
+                    <div class="tariff__name">Бизнес</div>
+                    <div class="tariff__desc">Подойдет компании для автоматизации работы, продаж и финучета</div>
+                    <div class="tariff__price">12 990 ₽ <span class="tariff__period">/мес.</span></div>
+                    <ul class="tariff__features">
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> 15 пользователей</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> 300 ГБ хранилища</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> CRM + Финансы</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> Проекты + Задачи</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> Аспро.ИИ</li>
+                        <li class="tariff__feature"><span class="tariff__check">✓</span> Автоматизация</li>
+                    </ul>
+                    <button class="btn btn--outline tariff__btn">Начать бесплатно</button>
+                </div>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .tariff .tariff--popular .tariff--starter .tariff__sticker .tariff__name .tariff__desc .tariff__price .tariff__period .tariff__saving .tariff__features .tariff__feature .tariff__check .tariff__btn
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== ШАГИ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Шаги <span class="badge badge--accent">.step</span></h2>
+            <p class="ui-kit__section-desc">Пошаговый процесс или инструкция</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step__number">1</div>
+                    <h3 class="step__title">Регистрация</h3>
+                    <p class="step__desc">Создайте аккаунт и получите 14 дней бесплатного доступа</p>
+                </div>
+                <div class="step">
+                    <div class="step__number">2</div>
+                    <h3 class="step__title">Настройка</h3>
+                    <p class="step__desc">Адаптируйте платформу под процессы вашей компании</p>
+                </div>
+                <div class="step">
+                    <div class="step__number">3</div>
+                    <h3 class="step__title">Работа</h3>
+                    <p class="step__desc">Управляйте бизнесом, а мы позаботимся об остальном</p>
+                </div>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .step .step__number .step__title .step__desc
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== ОСОБЕННОСТИ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Особенности <span class="badge badge--accent">.feature</span></h2>
+            <p class="ui-kit__section-desc">Блоки с иконкой, заголовком и описанием для презентации преимуществ</p>
+            <div class="features">
+                <div class="feature">
+                    <span class="feature__icon">📊</span>
+                    <h3 class="feature__title">Проекты</h3>
+                    <p class="feature__desc">Планируйте, контролируйте и управляйте проектами в удобном формате</p>
+                </div>
+                <div class="feature">
+                    <span class="feature__icon">💰</span>
+                    <h3 class="feature__title">Финансы</h3>
+                    <p class="feature__desc">Отслеживайте доходы, расходы и прибыльность в реальном времени</p>
+                </div>
+                <div class="feature">
+                    <span class="feature__icon">🤖</span>
+                    <h3 class="feature__title">Аспро.ИИ</h3>
+                    <p class="feature__desc">Искусственный интеллект для автоматизации рутины и анализа данных</p>
+                </div>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .feature .feature__icon .feature__title .feature__desc
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== БЕЙДЖИ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Бейджи <span class="badge badge--accent">.badge</span></h2>
+            <p class="ui-kit__section-desc">Метки и статусы для выделения элементов</p>
+            <div class="ui-kit__row">
+                <span class="badge badge--accent">Акцент</span>
+                <span class="badge badge--gradient">Градиент</span>
+                <span class="badge badge--success">Успешно</span>
+                <span class="badge badge--warning">Внимание</span>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .badge .badge--accent .badge--gradient .badge--success .badge--warning
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== ТАБЫ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Табы <span class="badge badge--accent">.tabs</span></h2>
+            <p class="ui-kit__section-desc">Переключение между категориями или вкладками</p>
+            <div class="tabs">
+                <button class="tabs__btn tabs__btn--active">Месяц</button>
+                <button class="tabs__btn">6 месяцев <span class="badge badge--gradient" style="font-size:0.5rem;">-10%</span></button>
+                <button class="tabs__btn">Год <span class="badge badge--gradient" style="font-size:0.5rem;">-20%</span></button>
+            </div>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .tabs .tabs__btn .tabs__btn--active
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== ШАПКА ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Шапка <span class="badge badge--accent">.header</span></h2>
+            <p class="ui-kit__section-desc">Навигационная шапка с логотипом и действиями</p>
+            <header class="header" style="position:relative;top:0;border-radius:var(--radius-sm);">
+                <div class="header__container">
+                    <a href="#" class="header__logo">Аспро.Cloud</a>
+                    <nav class="header__nav">
+                        <a href="#" class="header__link">Возможности</a>
+                        <a href="#" class="header__link">Решения</a>
+                        <a href="#" class="header__link">Тарифы</a>
+                        <a href="#" class="header__link">О нас</a>
+                    </nav>
+                    <div class="header__actions">
+                        <a href="tel:+78001010831" class="header__phone">+7 (800) 101-08-31</a>
+                        <button class="btn btn--secondary">Войти</button>
+                        <button class="btn btn--primary">Начать бесплатно</button>
+                    </div>
+                </div>
+            </header>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .header .header__container .header__logo .header__nav .header__link .header__actions .header__phone
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== ФУТЕР ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Футер <span class="badge badge--accent">.footer</span></h2>
+            <p class="ui-kit__section-desc">Подвал сайта с навигацией и контактами</p>
+            <footer class="footer" style="margin-top:0;border-radius:var(--radius-sm);">
+                <div class="footer__container">
+                    <div class="footer__grid">
+                        <div class="footer__col">
+                            <h4 class="footer__title">Продукты</h4>
+                            <a href="#" class="footer__link">CRM</a>
+                            <a href="#" class="footer__link">Проекты</a>
+                            <a href="#" class="footer__link">Финансы</a>
+                            <a href="#" class="footer__link">Задачи</a>
+                        </div>
+                        <div class="footer__col">
+                            <h4 class="footer__title">Решения</h4>
+                            <a href="#" class="footer__link">ИТ-компании</a>
+                            <a href="#" class="footer__link">Строительство</a>
+                            <a href="#" class="footer__link">Малый бизнес</a>
+                            <a href="#" class="footer__link">Услуги</a>
+                        </div>
+                        <div class="footer__col">
+                            <h4 class="footer__title">Компания</h4>
+                            <a href="#" class="footer__link">О нас</a>
+                            <a href="#" class="footer__link">Контакты</a>
+                            <a href="#" class="footer__link">Отзывы</a>
+                            <a href="#" class="footer__link">Блог</a>
+                        </div>
+                        <div class="footer__col">
+                            <h4 class="footer__title">Контакты</h4>
+                            <a href="tel:+78001010831" class="footer__link">+7 (800) 101-08-31</a>
+                            <a href="mailto:info@aspro.cloud" class="footer__link">info@aspro.cloud</a>
+                        </div>
+                    </div>
+                    <div class="footer__bottom">
+                        <span>© 2026 Аспро.Cloud. Все права защищены.</span>
+                        <div class="footer__socials">
+                            <span>VK</span>
+                            <span>Telegram</span>
+                            <span>YouTube</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .footer .footer__container .footer__grid .footer__col .footer__title .footer__link .footer__bottom .footer__socials
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Модальное окно <span class="badge badge--accent">.modal</span></h2>
+            <p class="ui-kit__section-desc">Всплывающее окно для диалогов и форм</p>
+            <button class="btn btn--primary" onclick="document.querySelector('.modal').style.display='flex'">Открыть модалку</button>
+            
+            <div class="modal" style="display:none;" onclick="if(event.target===this)this.style.display='none'">
+                <div class="modal__content">
+                    <button class="modal__close" onclick="this.closest('.modal').style.display='none'">✕</button>
+                    <h3 class="modal__title">Записаться на демонстрацию</h3>
+                    <p class="modal__desc">За 30 минут расскажем всё о возможностях Аспро.Cloud</p>
+                    <form class="form">
+                        <div class="form__group">
+                            <label class="form__label">Ваше имя</label>
+                            <input type="text" class="form__input" placeholder="Введите ваше имя" />
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label">Телефон</label>
+                            <input type="tel" class="form__input" placeholder="+7 (___)-___-__-__" />
+                        </div>
+                        <button class="btn btn--primary btn--block">Выбрать время</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="ui-kit__row u-mt-2">
+                <code style="color:var(--text-second);font-size:0.8rem;">
+                    .modal .modal__content .modal__close .modal__title .modal__desc
+                </code>
+            </div>
+        </section>
+
+        <!-- ===== ПРИМЕР ИСПОЛЬЗОВАНИЯ ===== -->
+        <section class="ui-kit__section">
+            <h2 class="ui-kit__section-title">Пример использования компонентов</h2>
+            <p class="ui-kit__section-desc">Сборка компонентов в готовый блок</p>
+            
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
+                    <div>
+                        <span class="badge badge--gradient" style="margin-bottom:0.5rem;">🔥 Скидка 20%</span>
+                        <h2 style="font-size:2.2rem;font-weight:700;margin-bottom:0.5rem;">
+                            Управляйте бизнесом<br>
+                            <span style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">эффективно и просто</span>
+                        </h2>
+                        <p style="color:var(--text-second);margin-bottom:1.5rem;max-width:400px;">
+                            Облачная платформа для управления проектами, финансами, 
+                            продажами и командой. Всё в одном месте.
+                        </p>
+                        <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
+                            <input type="email" class="form__input" placeholder="Введите ваш email" style="flex:1;min-width:200px;" />
+                            <button class="btn btn--primary btn--lg">Начать бесплатно</button>
+                        </div>
+                        <p style="color:var(--text-second);font-size:0.85rem;margin-top:0.5rem;">14 дней бесплатно. Без привязки карты.</p>
+                    </div>
+                    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;min-height:200px;display:flex;align-items:center;justify-content:center;color:var(--text-second);">
+                        📊 Панель управления
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Автоматическое скрытие модалки при клике на фон
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
